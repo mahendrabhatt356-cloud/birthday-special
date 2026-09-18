@@ -1,312 +1,315 @@
-/* =========================
-   ELEMENTS
-========================= */
+/* =========================================
+   BIRTHDAY CINEMATIC CONTROLLER
+========================================= */
 
-const openBtn = document.getElementById("openBtn");
-const messageScreen = document.getElementById("messageScreen");
-const continueBtn = document.getElementById("continueBtn");
+let currentScene = 0;
 
-const specialScreen = document.getElementById("specialScreen");
-const memoryBtn = document.getElementById("memoryBtn");
-
-const timelineScreen = document.getElementById("timelineScreen");
-const voiceBtn = document.getElementById("voiceBtn");
-
-const voiceScreen = document.getElementById("voiceScreen");
-
-const birthdayAudio = document.getElementById("birthdayAudio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-const currentTime = document.getElementById("currentTime");
-const duration = document.getElementById("duration");
-
-const finalBtn = document.getElementById("finalBtn");
+const scenes = document.querySelectorAll(".scene");
+const dots = document.querySelectorAll(".dot");
 
 
-/* =========================
-   OPEN SURPRISE
-========================= */
+/* =========================================
+   SHOW SCENE
+========================================= */
 
-if (openBtn && messageScreen) {
+function showScene(index) {
 
-    openBtn.addEventListener("click", () => {
+    scenes.forEach((scene, i) => {
 
-        openBtn.disabled = true;
+        scene.classList.toggle(
+            "active",
+            i === index
+        );
 
-        openBtn.innerHTML =
-            "Opening your surprise... ✨";
+    });
 
-        setTimeout(() => {
+    dots.forEach((dot, i) => {
 
-            messageScreen.classList.add("show");
-
-        }, 700);
+        dot.classList.toggle(
+            "active",
+            i === index
+        );
 
     });
 
 }
 
 
-/* =========================
-   MESSAGE → SPECIAL
-========================= */
+/* =========================================
+   NEXT SCENE
+========================================= */
 
-if (continueBtn && specialScreen) {
+function nextScene() {
 
-    continueBtn.addEventListener("click", () => {
+    if (currentScene < scenes.length - 1) {
 
-        continueBtn.disabled = true;
+        currentScene++;
 
-        continueBtn.innerHTML =
-            "Opening... ✨";
+        showScene(currentScene);
 
-        setTimeout(() => {
+        /*
+         * Final reveal gets special
+         * cinematic treatment.
+         */
 
-            specialScreen.classList.add("show");
+        if (currentScene === 4) {
 
-        }, 500);
-
-    });
-
-}
-
-
-/* =========================
-   SPECIAL → TIMELINE
-========================= */
-
-if (memoryBtn && timelineScreen) {
-
-    memoryBtn.addEventListener("click", () => {
-
-        memoryBtn.disabled = true;
-
-        memoryBtn.innerHTML =
-            "Opening memories... ✨";
-
-        setTimeout(() => {
-
-            timelineScreen.classList.add("show");
-
-        }, 500);
-
-    });
-
-}
-
-
-/* =========================
-   TIMELINE → VOICE
-========================= */
-
-if (voiceBtn && voiceScreen) {
-
-    voiceBtn.addEventListener("click", () => {
-
-        voiceBtn.disabled = true;
-
-        voiceBtn.innerHTML =
-            "Opening your message... 🎧";
-
-        setTimeout(() => {
-
-            voiceScreen.classList.add("show");
-
-        }, 500);
-
-    });
-
-}
-
-
-/* =========================
-   AUDIO PLAY / PAUSE
-========================= */
-
-if (playBtn && birthdayAudio) {
-
-    playBtn.addEventListener("click", () => {
-
-        if (birthdayAudio.paused) {
-
-            birthdayAudio.play()
-                .then(() => {
-
-                    playBtn.innerHTML = "❚❚";
-
-                })
-                .catch(() => {
-
-                    playBtn.innerHTML = "▶";
-
-                    alert(
-                        "Audio file nahi mila. birthday-message.mp3 ko website folder mein add karo."
-                    );
-
-                });
-
-        } else {
-
-            birthdayAudio.pause();
-
-            playBtn.innerHTML = "▶";
+            setTimeout(() => {
+                createConfetti(55);
+            }, 900);
 
         }
-
-    });
-
-}
-
-
-/* =========================
-   AUDIO PROGRESS
-========================= */
-
-if (birthdayAudio) {
-
-    birthdayAudio.addEventListener(
-        "timeupdate",
-        () => {
-
-            if (!birthdayAudio.duration) return;
-
-            const percent =
-                (birthdayAudio.currentTime /
-                birthdayAudio.duration) * 100;
-
-            if (progress) {
-
-                progress.style.width =
-                    percent + "%";
-
-            }
-
-            if (currentTime) {
-
-                currentTime.innerHTML =
-                    formatTime(
-                        birthdayAudio.currentTime
-                    );
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       AUDIO DURATION
-    ========================= */
-
-    birthdayAudio.addEventListener(
-        "loadedmetadata",
-        () => {
-
-            if (duration) {
-
-                duration.innerHTML =
-                    formatTime(
-                        birthdayAudio.duration
-                    );
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       AUDIO END
-    ========================= */
-
-    birthdayAudio.addEventListener(
-        "ended",
-        () => {
-
-            if (playBtn) {
-                playBtn.innerHTML = "▶";
-            }
-
-            if (progress) {
-                progress.style.width = "0%";
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================
-   TIME FORMAT
-========================= */
-
-function formatTime(seconds) {
-
-    if (!seconds || isNaN(seconds)) {
-
-        return "0:00";
 
     }
 
-    const minutes =
-        Math.floor(seconds / 60);
+}
 
-    const remainingSeconds =
-        Math.floor(seconds % 60);
 
-    return (
-        minutes +
-        ":" +
-        String(remainingSeconds).padStart(2, "0")
-    );
+/* =========================================
+   FINAL CELEBRATION
+========================================= */
+
+function celebrate() {
+
+    createConfetti(120);
+
+    createGoalEffect();
 
 }
 
 
+/* =========================================
+   CONFETTI
+========================================= */
 
-/* =========================
-   FINAL SCREEN
-========================= */
+function createConfetti(amount) {
 
-const finalScreen =
-    document.getElementById("finalScreen");
+    const container =
+        document.getElementById(
+            "confetti-container"
+        );
 
-const replayBtn =
-    document.getElementById("replayBtn");
+    for (let i = 0; i < amount; i++) {
 
+        const piece =
+            document.createElement("div");
 
-if (finalBtn && finalScreen) {
+        piece.className =
+            "confetti";
 
-    finalBtn.addEventListener("click", () => {
+        /*
+         * Random position
+         */
 
-        finalBtn.disabled = true;
+        piece.style.left =
+            Math.random() * 100 + "vw";
 
-        finalBtn.innerHTML =
-            "Revealing... ✦";
+        /*
+         * Random animation speed
+         */
+
+        piece.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        piece.style.animationDelay =
+            Math.random() * 0.8 + "s";
+
+        /*
+         * Random size
+         */
+
+        const size =
+            5 + Math.random() * 5;
+
+        piece.style.width =
+            size + "px";
+
+        piece.style.height =
+            (size * 1.6) + "px";
+
+        /*
+         * Random rotation
+         */
+
+        piece.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+
+        /*
+         * Birthday particle colors
+         */
+
+        const colors = [
+            "#7de5d6",
+            "#ffffff",
+            "#f7d774",
+            "#7db9ff",
+            "#ff8fa3"
+        ];
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+        container.appendChild(piece);
+
+        /*
+         * Remove after animation
+         */
 
         setTimeout(() => {
 
-            finalScreen.classList.add("show");
+            piece.remove();
 
-        }, 800);
+        }, 6000);
+
+    }
+
+}
+
+
+/* =========================================
+   GOAL EFFECT
+========================================= */
+
+function createGoalEffect() {
+
+    const goal =
+        document.createElement("div");
+
+    goal.innerHTML =
+        "⚽ GOAL!!! 🎉";
+
+    goal.style.position =
+        "fixed";
+
+    goal.style.left =
+        "50%";
+
+    goal.style.top =
+        "50%";
+
+    goal.style.transform =
+        "translate(-50%, -50%) scale(0)";
+
+    goal.style.zIndex =
+        "300";
+
+    goal.style.fontSize =
+        "clamp(40px, 12vw, 100px)";
+
+    goal.style.fontWeight =
+        "900";
+
+    goal.style.color =
+        "#ffffff";
+
+    goal.style.textShadow =
+        "0 0 30px rgba(125,229,214,0.8)";
+
+    goal.style.transition =
+        "transform .7s ease, opacity .7s ease";
+
+    document.body.appendChild(goal);
+
+
+    /*
+     * Animate in
+     */
+
+    requestAnimationFrame(() => {
+
+        goal.style.transform =
+            "translate(-50%, -50%) scale(1)";
 
     });
+
+
+    /*
+     * Animate out
+     */
+
+    setTimeout(() => {
+
+        goal.style.transform =
+            "translate(-50%, -50%) scale(1.3)";
+
+        goal.style.opacity =
+            "0";
+
+    }, 1200);
+
+
+    setTimeout(() => {
+
+        goal.remove();
+
+    }, 2000);
 
 }
 
 
-/* =========================
-   REPLAY
-========================= */
+/* =========================================
+   KEYBOARD SUPPORT
+========================================= */
 
-if (replayBtn) {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    replayBtn.addEventListener("click", () => {
+        if (
+            event.key === "ArrowRight" ||
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
 
-        location.reload();
+            /*
+             * Prevent page scrolling
+             */
 
-    });
+            event.preventDefault();
 
-}
- 
+            if (currentScene < scenes.length - 1) {
+
+                nextScene();
+
+            } else {
+
+                celebrate();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   PRELOAD IMAGES
+========================================= */
+
+const imageFiles = [
+    "haaland1.jpg",
+    "haaland2.jpg",
+    "haaland3.jpg",
+    "final.jpg"
+];
+
+imageFiles.forEach(file => {
+
+    const img =
+        new Image();
+
+    img.src = file;
+
+});
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+showScene(0);

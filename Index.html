@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Arjun ⚽</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Cinematic Background -->
+    <div class="background">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="stadium-light light-left"></div>
+        <div class="stadium-light light-right"></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <!-- Main App -->
+    <main id="app">
+
+        <!-- =========================
+             SCENE 0 — OPENING
+        ========================== -->
+
+        <section class="scene active" id="scene0">
+
+            <div class="content opening">
+
+                <div class="mini-title">
+                    MATCHDAY SPECIAL
+                </div>
+
+                <h1 class="opening-title">
+                    ARJUN
+                </h1>
+
+                <div class="opening-line"></div>
+
+                <p class="opening-subtitle">
+                    TODAY'S MATCH IS ALL ABOUT YOU
+                </p>
+
+                <div class="football">
+                    ⚽
+                </div>
+
+                <p class="tap-text">
+                    Your birthday story awaits...
+                </p>
+
+                <button class="next-btn" onclick="nextScene()">
+                    KICK OFF <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCENE 1 — SHAYARI 1
+        ========================== -->
+
+        <section class="scene" id="scene1">
+
+            <div class="content">
+
+                <div class="scene-number">
+                    FIRST HALF
+                </div>
+
+                <div class="photo-wrapper">
+                    <img
+                        src="haaland1.jpg"
+                        alt="Haaland"
+                    >
+                    <div class="photo-shine"></div>
+                </div>
+
+                <div class="text-card">
+
+                    <div class="card-icon">
+                        ⚽
+                    </div>
+
+                    <h2>
+                        Har khwahish ek goal bane
+                    </h2>
+
+                    <p class="shayari">
+                        Goal ki tarah teri har khwahish net mein jaaye,<br>
+                        Haaland ki tarah har challenge tere saamne jhuk jaaye,<br>
+                        Khushiyon se bhara rahe tera har ek din,<br>
+                        Aur tera birthday har saal aur bhi special ban jaaye.
+                    </p>
+
+                </div>
+
+                <button class="next-btn" onclick="nextScene()">
+                    NEXT MOMENT <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCENE 2 — SHAYARI 2
+        ========================== -->
+
+        <section class="scene" id="scene2">
+
+            <div class="content">
+
+                <div class="scene-number">
+                    SECOND HALF
+                </div>
+
+                <div class="photo-wrapper">
+                    <img
+                        src="haaland2.jpg"
+                        alt="Haaland Celebration"
+                    >
+                    <div class="photo-shine"></div>
+                </div>
+
+                <div class="text-card">
+
+                    <div class="card-icon">
+                        🔥
+                    </div>
+
+                    <h2>
+                        Dosti bhi ek perfect match hai
+                    </h2>
+
+                    <p class="shayari">
+                        Jahan dosti ho wahan celebration zaroori hai,<br>
+                        Aur Arjun jaisa dost ho toh party bhi zaroori hai,<br>
+                        Haaland ke goals ki tarah success mile tujhe baar-baar,<br>
+                        Happy Birthday bro, chamakta rahe tera har saal!
+                    </p>
+
+                </div>
+
+                <button class="next-btn" onclick="nextScene()">
+                    KEEP GOING <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCENE 3 — SUSPENSE
+        ========================== -->
+
+        <section class="scene" id="scene3">
+
+            <div class="content suspense">
+
+                <div class="scene-number">
+                    90TH MINUTE
+                </div>
+
+                <div class="photo-wrapper suspense-photo">
+                    <img
+                        src="haaland3.jpg"
+                        alt="Haaland"
+                    >
+                    <div class="photo-shine"></div>
+                </div>
+
+                <div class="text-card suspense-card">
+
+                    <div class="card-icon">
+                        ⏳
+                    </div>
+
+                    <h2>
+                        The final moment...
+                    </h2>
+
+                    <p>
+                        Har match ka ek special moment hota hai.
+                        <br>
+                        Aur aaj ka special moment...
+                        <br>
+                        <strong>abhi baaki hai.</strong>
+                    </p>
+
+                </div>
+
+                <button class="next-btn" onclick="nextScene()">
+                    FINAL WHISTLE <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+<!-- FINAL SCENE -->
+<section class="scene final-scene" id="scene-4">
+
+    <div class="final-bg-glow"></div>
+
+    <div class="final-header">
+        <span class="final-badge">⚽ MATCH WON</span>
+        <p class="final-subtitle">THE FINAL WHISTLE</p>
+    </div>
+
+    <div class="duo-stage">
+
+        <!-- Haaland Photo -->
+        <div class="person-card haaland-card">
+            <div class="person-glow"></div>
+            <img src="haaland1.jpg" alt="Football Celebration">
+            <div class="photo-label">THE STRIKER</div>
+        </div>
+
+        <!-- Center Football -->
+        <div class="center-ball">
+            <div class="ball-ring"></div>
+            <span>⚽</span>
+        </div>
+
+        <!-- Arjun Photo -->
+        <div class="person-card arjun-card">
+            <div class="person-glow"></div>
+            <img src="arjun.jpg" alt="Arjun">
+            <div class="photo-label">THE BIRTHDAY BOY</div>
+        </div>
+
+    </div>
+
+    <div class="birthday-reveal">
+
+        <div class="tiny-line"></div>
+
+        <h1>HAPPY BIRTHDAY</h1>
+
+        <h2>ARJUN 🎂</h2>
+
+        <p>
+            Aaj ka match sirf football ka nahi...
+            <br>
+            <strong>tumhari celebration ka hai! ⚽🔥</strong>
+        </p>
+
+        <div class="final-message">
+            May your life be filled with
+            <span>goals, victories & unforgettable moments.</span>
+        </div>
+
+        <button class="next-btn celebrate-btn" onclick="celebrate()">
+            <span>CELEBRATE</span>
+            <span class="btn-icon">🎉</span>
+        </button>
+
+    </div>
+
+</section>
+
+    </main>
+
+    <!-- Football decoration -->
+    <div class="floating-ball">
+        ⚽
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confetti-container"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
