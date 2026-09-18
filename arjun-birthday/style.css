@@ -1,0 +1,1337 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #020608;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #123438 0%,
+            #081719 35%,
+            #030809 70%,
+            #010304 100%
+        );
+    z-index: -10;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.18) 1px,
+            transparent 1px
+        );
+    background-size: 48px 48px;
+    animation: starsMove 25s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes starsMove {
+
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(48px, 48px);
+    }
+}
+
+
+/* =========================================
+   GLOW
+========================================= */
+
+.glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.35;
+}
+
+.glow-1 {
+    top: -200px;
+    left: -150px;
+    background: #167a75;
+}
+
+.glow-2 {
+    right: -180px;
+    bottom: -180px;
+    background: #164d79;
+}
+
+
+/* =========================================
+   STADIUM LIGHTS
+========================================= */
+
+.stadium-light {
+    position: absolute;
+    top: -250px;
+    width: 350px;
+    height: 600px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.18),
+        transparent
+    );
+    filter: blur(35px);
+    opacity: 0.25;
+    transform: rotate(18deg);
+}
+
+.light-left {
+    left: 8%;
+}
+
+.light-right {
+    right: 8%;
+    transform: rotate(-18deg);
+}
+
+
+/* =========================================
+   PROGRESS DOTS
+========================================= */
+
+.progress {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 7px;
+
+    z-index: 100;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.2);
+
+    transition:
+        width 0.4s ease,
+        background 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.dot.active {
+    width: 25px;
+
+    background: #7de5d6;
+
+    box-shadow:
+        0 0 15px rgba(125,229,214,0.7);
+}
+
+
+/* =========================================
+   MAIN APP
+========================================= */
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =========================================
+   SCENES
+========================================= */
+
+.scene {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 55px 20px 25px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        scale(1.06)
+        translateY(25px);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s ease,
+        visibility 0.75s ease;
+}
+
+.scene.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.content {
+    width: 100%;
+    max-width: 850px;
+
+    text-align: center;
+
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================================
+   OPENING
+========================================= */
+
+.opening {
+    animation: openingIn 1s ease forwards;
+}
+
+@keyframes openingIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mini-title {
+    color: #7de5d6;
+
+    font-size: 11px;
+    letter-spacing: 5px;
+
+    margin-bottom: 20px;
+}
+
+.opening-title {
+    font-size: clamp(65px, 17vw, 150px);
+
+    line-height: 0.85;
+
+    font-weight: 900;
+
+    letter-spacing: -7px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #7de5d6,
+            #ffffff
+        );
+
+    -webkit-background-clip: text;
+    color: transparent;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(125,229,214,0.18)
+        );
+}
+
+.opening-line {
+    width: 80px;
+    height: 2px;
+
+    background: #7de5d6;
+
+    margin: 25px auto;
+
+    box-shadow:
+        0 0 15px rgba(125,229,214,0.7);
+}
+
+.opening-subtitle {
+    color: #9db3b4;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+.football {
+    font-size: 70px;
+
+    margin: 35px 0 18px;
+
+    animation:
+        footballFloat 2.5s ease-in-out infinite,
+        footballGlow 2s ease-in-out infinite;
+}
+
+@keyframes footballFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-14px)
+            rotate(10deg);
+    }
+}
+
+@keyframes footballGlow {
+
+    50% {
+        filter:
+            drop-shadow(
+                0 0 20px
+                rgba(125,229,214,0.7)
+            );
+    }
+}
+
+.tap-text {
+    color: #64797a;
+    font-size: 11px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   SCENE LABEL
+========================================= */
+
+.scene-number {
+    display: inline-block;
+
+    color: #7de5d6;
+
+    border: 1px solid
+        rgba(125,229,214,0.3);
+
+    border-radius: 50px;
+
+    padding: 7px 17px;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================
+   PHOTOS
+========================================= */
+
+.photo-wrapper {
+    width: min(330px, 76vw);
+
+    margin: 0 auto 18px;
+
+    position: relative;
+
+    border-radius: 25px;
+}
+
+.photo-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 29px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(125,229,214,0.55),
+            transparent 45%,
+            rgba(70,140,255,0.4)
+        );
+
+    filter: blur(7px);
+
+    z-index: -1;
+}
+
+.photo-wrapper img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+
+    border-radius: 23px;
+
+    border: 1px solid
+        rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,0.65);
+}
+
+.photo-shine {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 30%,
+            rgba(255,255,255,0.15),
+            transparent 65%
+        );
+
+    transform:
+        translateX(-120%);
+
+    animation:
+        shine 4s ease-in-out infinite;
+}
+
+@keyframes shine {
+
+    0% {
+        transform:
+            translateX(-120%);
+    }
+
+    35%,
+    100% {
+        transform:
+            translateX(120%);
+    }
+}
+
+
+/* =========================================
+   TEXT CARD
+========================================= */
+
+.text-card {
+    width: min(720px, 94vw);
+
+    margin: 0 auto;
+
+    padding: 18px 20px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 20px;
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(255,255,255,0.015);
+}
+
+.card-icon {
+    font-size: 20px;
+
+    margin-bottom: 7px;
+}
+
+.text-card h2 {
+    font-size: clamp(20px, 5vw, 29px);
+
+    margin-bottom: 10px;
+}
+
+.text-card p {
+    color: #d4e1e1;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+.shayari {
+    font-size: 13px !important;
+}
+
+
+/* =========================================
+   SUSPENSE
+========================================= */
+
+.suspense-photo {
+    filter:
+        saturate(0.8)
+        brightness(0.85);
+}
+
+.suspense-card {
+    margin-top: 5px;
+}
+
+.suspense-card p {
+    color: #b8c8c8;
+}
+
+.suspense-card strong {
+    color: #7de5d6;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.next-btn {
+    margin-top: 19px;
+
+    padding: 13px 25px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7de5d6,
+            #b9fff5
+        );
+
+    color: #031011;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 25px
+        rgba(125,229,214,0.2);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.next-btn span {
+    margin-left: 8px;
+
+    font-size: 14px;
+}
+
+.next-btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 35px
+        rgba(125,229,214,0.4);
+}
+
+.next-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   FINAL PHOTO
+========================================= */
+
+.final-photo-wrapper {
+    width: min(390px, 83vw);
+
+    margin: 0 auto 12px;
+
+    position: relative;
+}
+
+.final-photo {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+
+    border-radius: 27px;
+
+    border:
+        1px solid
+        rgba(125,229,214,0.4);
+
+    box-shadow:
+        0 0 55px
+        rgba(125,229,214,0.15),
+        0 25px 70px
+        rgba(0,0,0,0.65);
+}
+
+.final-photo-glow {
+    position: absolute;
+
+    inset: -5px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(125,229,214,0.15);
+
+    animation:
+        finalGlow 2.5s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes finalGlow {
+
+    50% {
+        box-shadow:
+            0 0 30px
+            rgba(125,229,214,0.25);
+    }
+}
+
+
+/* =========================================
+   FINAL TEXT
+========================================= */
+
+.final-label {
+    color: #7de5d6;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 7px;
+}
+
+.birthday-title {
+    font-size: clamp(34px, 9vw, 70px);
+
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #7de5d6,
+            #ffffff
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+}
+
+.birthday-name {
+    font-size: clamp(25px, 6vw, 42px);
+
+    margin-top: 6px;
+
+    color: #ffffff;
+}
+
+.final-message {
+    width: min(700px, 94vw);
+
+    margin: 13px auto 0;
+
+    color: #cbdada;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+.final-message p {
+    margin-bottom: 7px;
+}
+
+.final-message strong {
+    display: block;
+
+    color: #7de5d6;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   FLOATING BALL
+========================================= */
+
+.floating-ball {
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    font-size: 25px;
+
+    opacity: 0.25;
+
+    z-index: 20;
+
+    animation:
+        cornerBall 5s ease-in-out infinite;
+}
+
+@keyframes cornerBall {
+
+    50% {
+        transform:
+            translateY(-15px)
+            rotate(180deg);
+    }
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+#confetti-container {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 200;
+}
+
+.confetti {
+    position: absolute;
+
+    top: -20px;
+
+    width: 7px;
+    height: 13px;
+
+    animation:
+        confettiFall
+        linear
+        forwards;
+}
+
+@keyframes confettiFall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .scene {
+        padding:
+            48px
+            15px
+            18px;
+    }
+
+    .photo-wrapper {
+        width: min(290px, 73vw);
+        margin-bottom: 14px;
+    }
+
+    .text-card {
+        padding:
+            15px
+            15px;
+    }
+
+    .text-card h2 {
+        font-size: 20px;
+    }
+
+    .text-card p {
+        font-size: 12px;
+        line-height: 1.65;
+    }
+
+    .next-btn {
+        margin-top: 14px;
+        padding: 12px 22px;
+    }
+
+    .final-photo-wrapper {
+        width: min(330px, 78vw);
+    }
+
+    .final-message {
+        font-size: 11px;
+    }
+}
+
+
+/* Small height phones */
+
+@media (max-height: 700px) {
+
+    .photo-wrapper {
+        width: min(250px, 65vw);
+    }
+
+    .text-card {
+        padding: 12px 14px;
+    }
+
+    .text-card h2 {
+        font-size: 18px;
+    }
+
+    .text-card p {
+        font-size: 11px;
+    }
+
+    .next-btn {
+        margin-top: 10px;
+    }
+
+    .final-photo-wrapper {
+        width: min(270px, 67vw);
+    }
+
+    .final-message {
+        margin-top: 8px;
+        line-height: 1.45;
+    }
+}
+/* =========================================
+   FINAL DUO SCENE — MOBILE / CHROME FIX
+========================================= */
+
+.final-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 14px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(0, 180, 255, 0.14),
+            transparent 38%
+        ),
+        #05070c;
+}
+
+.final-bg-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+
+    background: rgba(0, 180, 255, 0.08);
+    filter: blur(70px);
+
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+/* HEADER */
+
+.final-header {
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.final-badge {
+    display: inline-block;
+
+    padding: 5px 13px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.06);
+
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+
+    box-shadow: 0 0 20px rgba(0,180,255,0.15);
+}
+
+.final-subtitle {
+    margin: 5px 0 0;
+
+    color: rgba(255,255,255,0.42);
+    font-size: 7px;
+    letter-spacing: 3px;
+}
+
+/* =========================================
+   PHOTO ROW
+========================================= */
+
+.duo-stage {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 620px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-shrink: 1;
+}
+
+/* PHOTO CARD */
+
+.person-card {
+    position: relative;
+
+    width: min(31vw, 210px);
+    height: min(39vh, 245px);
+
+    min-width: 0;
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.17);
+
+    background: #090d14;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.55),
+        0 0 25px rgba(0,160,255,0.08);
+}
+
+.person-card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transform: scale(1.02);
+
+    transition: transform 6s ease;
+}
+
+.scene.active .person-card img {
+    transform: scale(1.06);
+}
+
+.person-card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 50%,
+            rgba(0,0,0,0.82) 100%
+        );
+
+    pointer-events: none;
+}
+
+.person-glow {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 16px;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,190,255,0.13);
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.photo-label {
+    position: absolute;
+
+    z-index: 4;
+
+    bottom: 10px;
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    font-size: 7px;
+    letter-spacing: 2px;
+
+    color: rgba(255,255,255,0.72);
+}
+
+/* =========================================
+   CENTER BALL
+========================================= */
+
+.center-ball {
+    position: relative;
+    z-index: 6;
+
+    width: 50px;
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(7,11,18,0.96);
+
+    border: 1px solid rgba(255,255,255,0.23);
+
+    box-shadow:
+        0 0 22px rgba(0,180,255,0.28),
+        0 0 45px rgba(0,180,255,0.1);
+
+    animation: ballFloat 2.8s ease-in-out infinite;
+}
+
+.center-ball span {
+    font-size: 23px;
+}
+
+.ball-ring {
+    position: absolute;
+    inset: -7px;
+
+    border: 1px solid rgba(0,190,255,0.22);
+
+    border-radius: 50%;
+
+    animation: ringRotate 5s linear infinite;
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+.birthday-reveal {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    max-width: 600px;
+
+    text-align: center;
+
+    margin-top: 10px;
+
+    flex-shrink: 0;
+}
+
+.tiny-line {
+    width: 30px;
+    height: 1px;
+
+    margin: 0 auto 6px;
+
+    background: rgba(255,255,255,0.35);
+}
+
+.birthday-reveal h1 {
+    margin: 0;
+
+    font-size: clamp(20px, 5vw, 34px);
+
+    line-height: 1;
+
+    letter-spacing: 4px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 25px rgba(0,180,255,0.35);
+}
+
+.birthday-reveal h2 {
+    margin: 4px 0 6px;
+
+    font-size: clamp(26px, 6vw, 43px);
+
+    line-height: 1;
+
+    letter-spacing: 5px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,0.3),
+        0 0 35px rgba(0,180,255,0.3);
+}
+
+.birthday-reveal p {
+    margin: 0;
+
+    color: rgba(255,255,255,0.63);
+
+    font-size: 10px;
+
+    line-height: 1.45;
+}
+
+.birthday-reveal strong {
+    color: #fff;
+}
+
+.final-message {
+    margin: 6px auto 9px;
+
+    font-size: 8px;
+
+    color: rgba(255,255,255,0.4);
+
+    line-height: 1.35;
+}
+
+.final-message span {
+    display: block;
+
+    color: rgba(255,255,255,0.7);
+
+    margin-top: 2px;
+}
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.celebrate-btn {
+    margin-top: 0;
+
+    transform: scale(0.88);
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes ballFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes ringRotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+    .final-scene {
+        padding: 8px 10px;
+    }
+
+    .final-header {
+        margin-bottom: 7px;
+    }
+
+    .duo-stage {
+        gap: 8px;
+    }
+
+    .person-card {
+        width: 39vw;
+        height: 185px;
+        border-radius: 13px;
+    }
+
+    .center-ball {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+    }
+
+    .center-ball span {
+        font-size: 19px;
+    }
+
+    .ball-ring {
+        inset: -6px;
+    }
+
+    .birthday-reveal {
+        margin-top: 7px;
+    }
+
+    .birthday-reveal h1 {
+        font-size: 19px;
+        letter-spacing: 3px;
+    }
+
+    .birthday-reveal h2 {
+        font-size: 27px;
+        letter-spacing: 4px;
+        margin: 3px 0 5px;
+    }
+
+    .birthday-reveal p {
+        font-size: 9px;
+    }
+
+    .final-message {
+        font-size: 7px;
+        margin: 5px auto 7px;
+    }
+
+    .celebrate-btn {
+        transform: scale(0.78);
+    }
+}
+
+/* =========================================
+   VERY SHORT SCREEN
+========================================= */
+
+@media (max-height: 650px) {
+
+    .final-scene {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .person-card {
+        height: 155px;
+    }
+
+    .birthday-reveal {
+        margin-top: 5px;
+    }
+
+    .birthday-reveal h1 {
+        font-size: 17px;
+    }
+
+    .birthday-reveal h2 {
+        font-size: 24px;
+    }
+
+    .birthday-reveal p {
+        font-size: 8px;
+    }
+
+    .final-message {
+        display: none;
+    }
+}
